@@ -1,6 +1,6 @@
 package pl.bioinformatyka;
 
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Main {
 
@@ -16,27 +16,33 @@ public class Main {
             No i nie ma wyjątków sensownych
              */
         if(args.length>4){
-            DNA = args[0];
-            alfaParam = Double.parseDouble(args[1]);
-            betaParam = Double.parseDouble(args[2]);
-            time = Double.parseDouble(args[3]);
-            avarageTime = Double.parseDouble(args[4]);
-            if(args.length>5){
-                timeUnit = Double.parseDouble(args[5]);
+            try {
+                DNA = args[0];
+                alfaParam = Double.parseDouble(args[1]);
+                betaParam = Double.parseDouble(args[2]);
+                time = Double.parseDouble(args[3]);
+                avarageTime = Double.parseDouble(args[4]);
+                if (args.length > 5) {
+                    timeUnit = Double.parseDouble(args[5]);
+                }
+            } catch (NumberFormatException e){
+                System.out.println("Niepoprawne parametry");
+                InputReader reader = new InputReader();
+                DNA = reader.readSequence();
+                alfaParam = reader.readAlfa();
+                betaParam = reader.readBeta();
+                time = reader.readTime();
+                avarageTime = reader.readAvarageTime();
+                timeUnit = reader.readTimeUnit();
             }
         } else {
-            Scanner scan = new Scanner(System.in);
-            System.out.println("Wpisz sekwencje poczatkowa");
-            DNA = scan.nextLine();
-            System.out.println("Wpisz parametry alfa i beta modelu Kimury");
-            alfaParam = scan.nextDouble();
-            betaParam = scan.nextDouble();
-            System.out.println("Wpisz czas przez ktory sekwencja ewouluje");
-            time = scan.nextDouble();
-            System.out.println("Wpisz średni czas po ktorym nastapi rozdzielenie linii gatunkowej");
-            avarageTime = scan.nextDouble();
-            System.out.println("Wpisz czas słuzacy jako najmniejsza jednostka przy wyświetlaniu drzewa");
-            timeUnit = scan.nextDouble();
+            InputReader reader = new InputReader();
+            DNA = reader.readSequence();
+            alfaParam = reader.readAlfa();
+            betaParam = reader.readBeta();
+            time = reader.readTime();
+            avarageTime = reader.readAvarageTime();
+            timeUnit = reader.readTimeUnit();
         }
         RandomTimeGenerator timeGenerator = new RandomTimeGenerator(avarageTime);
         Tree tree = new Tree(DNA);
