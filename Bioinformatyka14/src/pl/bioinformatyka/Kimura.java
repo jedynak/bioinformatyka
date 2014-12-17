@@ -12,8 +12,8 @@ public class Kimura{
         random = new Random();
     }
     public String mutateDNA(String oldDNA, double time ){
-        double transitionsPossibility = (1.0 - Math.exp(-4.0 * time * beta))/4.0;
-        double transversionsPossibility = (1.0 + Math.exp(-4.0 * time * beta) - 2*Math.exp(-2.0 * time * (alfa + beta)) )/4.0;
+        double transversionsPossibility = (1.0 - Math.exp(-4.0 * time * beta))/4.0;
+        double transitionsPossibility = (1.0 + Math.exp(-4.0 * time * beta) - 2*Math.exp(-2.0 * time * (alfa + beta)) )/4.0;
         StringBuilder newDNA = new StringBuilder(oldDNA.length());
         for(int i = 0; i < oldDNA.length(); i++) {
             char c = oldDNA.charAt(i);
