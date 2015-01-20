@@ -12,16 +12,16 @@ public class InputReader {
         this.inputFile = new File(filename);
     }
 
-    public int[][] readAdjacencyMatrix() throws FileNotFoundException {
+    public AdjacencyMatrix readAdjacencyMatrix() throws FileNotFoundException {
         Scanner scanner =  new Scanner(inputFile).useLocale(Locale.US);
         int size = Integer.parseInt(scanner.nextLine());
-        int[][] ret = new int[size][size];
+        double[][] ret = new double[size][size];
 
         for (int i=0; i<size; i++) {
             for (int j=0; j<size; j++) {
-                ret[i][j] = scanner.nextInt();
+                ret[i][j] = scanner.nextDouble();
             }
         }
-        return ret;
+        return new AdjacencyMatrix(ret);
     }
 }
