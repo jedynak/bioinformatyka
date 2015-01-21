@@ -5,7 +5,7 @@ public class Cluster {
     private Cluster parent;
     private Cluster leftChild;
     private Cluster rightChild;
-    private long distanceToParent;
+    private double distanceToParent;
 
     public Cluster() {
     }
@@ -46,11 +46,11 @@ public class Cluster {
         this.rightChild = rightChild;
     }
 
-    public long getDistanceToParent() {
+    public double getDistanceToParent() {
         return distanceToParent;
     }
 
-    public void setDistanceToParent(long distanceToParent) {
+    public void setDistanceToParent(double distanceToParent) {
         this.distanceToParent = distanceToParent;
     }
 }

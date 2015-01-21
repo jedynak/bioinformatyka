@@ -1,8 +1,9 @@
 package pl.bioinformatyka;
 
-import pl.bioinformatyka.common.AdjacencyMatrix;
+import pl.bioinformatyka.common.Cluster;
+import pl.bioinformatyka.common.DistanceMatrix;
 import pl.bioinformatyka.common.InputReader;
-import pl.bioinformatyka.common.Pair;
+import pl.bioinformatyka.upgma.UpgmaAlgorithm;
 
 import java.io.FileNotFoundException;
 
@@ -10,17 +11,9 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
         InputReader reader = new InputReader("input.txt");
-        AdjacencyMatrix ret = reader.readAdjacencyMatrix();
-        System.out.println(ret.getMatrix().length);
+        DistanceMatrix ret = reader.readDistanceMatrix();
 
-        for (int i=0; i<5; i++) {
-            for (int j=0; j<5; j++) {
-                System.out.print(ret.getMatrix()[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-        Pair pair = ret.findNearest();
-        System.out.println(pair.getX() + "|" + pair.getY());
+        UpgmaAlgorithm alg = new UpgmaAlgorithm(ret);
+        Cluster cluster = alg.runAlgorithm();
     }
 }
