@@ -3,6 +3,8 @@ package pl.bioinformatyka.common;
 public class AdjacencyMatrix {
     private double[][] matrix;
 
+    public AdjacencyMatrix(){}
+
     public AdjacencyMatrix(double[][] matrix) {
         this.matrix = new double[matrix.length][matrix[0].length];
         for (int i=0; i<matrix.length; i++) {
@@ -29,5 +31,8 @@ public class AdjacencyMatrix {
 
     public double[][] getMatrix() {
         return matrix;
+    }
+    public void setMatrix(double[][] _matrix) {
+        matrix= _matrix;
     }
 }

@@ -2,6 +2,7 @@ package pl.bioinformatyka;
 
 import pl.bioinformatyka.common.AdjacencyMatrix;
 import pl.bioinformatyka.common.InputReader;
+import pl.bioinformatyka.common.NeighbourJoining;
 import pl.bioinformatyka.common.Pair;
 
 import java.io.FileNotFoundException;
@@ -9,7 +10,7 @@ import java.io.FileNotFoundException;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        InputReader reader = new InputReader("input.txt");
+        InputReader reader = new InputReader("input2.txt");
         AdjacencyMatrix ret = reader.readAdjacencyMatrix();
         System.out.println(ret.getMatrix().length);
 
@@ -22,5 +23,7 @@ public class Main {
 
         Pair pair = ret.findNearest();
         System.out.println(pair.getX() + "|" + pair.getY());
+        NeighbourJoining NJ = new NeighbourJoining();
+        NJ.algorithm(ret.getMatrix());
     }
 }
