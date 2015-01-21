@@ -15,5 +15,7 @@ public class Main {
 
         UpgmaAlgorithm alg = new UpgmaAlgorithm(ret);
         Cluster cluster = alg.runAlgorithm();
+
+        cluster.simplePrint(1);
     }
 }

@@ -14,6 +14,27 @@ public class Cluster {
         this.id = id;
     }
 
+    public void simplePrint(double step){
+        printNode(this,0,step);
+    }
+
+    private void  printNode(Cluster node, int depth, double step){
+        int numOfSteps = (int)(node.getDistanceToParent() / step)+1;
+        if(node.getRightChild()!=null) {
+            printNode(node.getRightChild(),depth+numOfSteps,step);
+        }
+        for(int i=0;i<depth;++i){
+            System.out.print(" ");
+        }
+        for(int i=0;i<numOfSteps;++i){
+            System.out.print("-");
+        }
+        System.out.println(node.getId());
+        if(node.getLeftChild()!=null) {
+            printNode(node.getLeftChild(),depth+numOfSteps,step);
+        }
+    }
+
     public String getId() {
         return id;
     }
