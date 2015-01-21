@@ -10,16 +10,22 @@ import pl.bioinformatyka.common.NeighbourJoining;import java.io.FileNotFoundExce
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        InputReader reader = new InputReader("input2.txt");
+        InputReader reader = new InputReader("input.txt");
         DistanceMatrix ret = reader.readDistanceMatrix();
+        DistanceMatrix ret2 = reader.readDistanceMatrix();
 
+        System.out.println("Upgma:");
         UpgmaAlgorithm alg = new UpgmaAlgorithm(ret);
         Cluster cluster = alg.runAlgorithm();
 
         cluster.simplePrint(1);
 
         TopologyComparator.compareTopology(alg.getEdgeList(), alg.getEdgeList());
+
+        System.out.println("NJ:");
         NeighbourJoining NJ = new NeighbourJoining();
-        NJ.algorithm(ret.getMatrix());
+        Cluster cluster2 = NJ.algorithm(ret2.getMatrix());
+
+        cluster2.simplePrint(1);
     }
 }

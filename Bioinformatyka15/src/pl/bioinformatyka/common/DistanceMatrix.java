@@ -3,6 +3,7 @@ package pl.bioinformatyka.common;
 public class DistanceMatrix {
     private double[][] matrix;
 
+    public DistanceMatrix() {}
     public DistanceMatrix(double[][] matrix) {
         this.matrix = new double[matrix.length][matrix[0].length];
         for (int i=0; i<matrix.length; i++) {
