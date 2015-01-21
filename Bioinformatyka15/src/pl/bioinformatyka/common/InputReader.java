@@ -12,7 +12,7 @@ public class InputReader {
         this.inputFile = new File(filename);
     }
 
-    public AdjacencyMatrix readAdjacencyMatrix() throws FileNotFoundException {
+    public DistanceMatrix readDistanceMatrix() throws FileNotFoundException {
         Scanner scanner =  new Scanner(inputFile).useLocale(Locale.US);
         int size = Integer.parseInt(scanner.nextLine());
         double[][] ret = new double[size][size];
@@ -22,6 +22,6 @@ public class InputReader {
                 ret[i][j] = scanner.nextDouble();
             }
         }
-        return new AdjacencyMatrix(ret);
+        return new DistanceMatrix(ret);
     }
 }

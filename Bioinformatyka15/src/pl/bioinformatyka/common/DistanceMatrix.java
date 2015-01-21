@@ -1,11 +1,9 @@
 package pl.bioinformatyka.common;
 
-public class AdjacencyMatrix {
+public class DistanceMatrix {
     private double[][] matrix;
 
-    public AdjacencyMatrix(){}
-
-    public AdjacencyMatrix(double[][] matrix) {
+    public DistanceMatrix(double[][] matrix) {
         this.matrix = new double[matrix.length][matrix[0].length];
         for (int i=0; i<matrix.length; i++) {
             for (int j=0; j<matrix[0].length; j++) {
@@ -32,7 +30,13 @@ public class AdjacencyMatrix {
     public double[][] getMatrix() {
         return matrix;
     }
-    public void setMatrix(double[][] _matrix) {
-        matrix= _matrix;
+
+    public void setMatrix(double[][] matrix) {
+        this.matrix = new double[matrix.length][matrix[0].length];
+        for (int i=0; i<matrix.length; i++) {
+            for (int j=0; j<matrix[0].length; j++) {
+                this.matrix[i][j] = matrix[i][j];
+            }
+        }
     }
 }

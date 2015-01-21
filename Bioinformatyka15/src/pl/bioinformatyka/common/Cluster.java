@@ -1,17 +1,44 @@
 package pl.bioinformatyka.common;
 
+import java.util.Arrays;
+
 public class Cluster {
     private String id;
     private Cluster parent;
     private Cluster leftChild;
     private Cluster rightChild;
-    private long distanceToParent;
+    private double distanceToParent;
 
     public Cluster() {
     }
 
     public Cluster(String id) {
-        this.id = id;
+        String original = id;
+        char[] chars = original.toCharArray();
+        Arrays.sort(chars);
+        String sorted = new String(chars);
+        this.id = sorted;
+    }
+
+    public void simplePrint(double step){
+        printNode(this,0,step);
+    }
+
+    private void  printNode(Cluster node, int depth, double step){
+        int numOfSteps = (int)(node.getDistanceToParent() / step)+1;
+        if(node.getRightChild()!=null) {
+            printNode(node.getRightChild(),depth+numOfSteps,step);
+        }
+        for(int i=0;i<depth;++i){
+            System.out.print(" ");
+        }
+        for(int i=0;i<numOfSteps;++i){
+            System.out.print("-");
+        }
+        System.out.println(node.getId());
+        if(node.getLeftChild()!=null) {
+            printNode(node.getLeftChild(),depth+numOfSteps,step);
+        }
     }
 
     public String getId() {
@@ -46,11 +73,11 @@ public class Cluster {
         this.rightChild = rightChild;
     }
 
-    public long getDistanceToParent() {
+    public double getDistanceToParent() {
         return distanceToParent;
     }
 
-    public void setDistanceToParent(long distanceToParent) {
+    public void setDistanceToParent(double distanceToParent) {
         this.distanceToParent = distanceToParent;
     }
 }
