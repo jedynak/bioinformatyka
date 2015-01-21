@@ -1,5 +1,7 @@
 package pl.bioinformatyka.common;
 
+import java.util.Arrays;
+
 public class Cluster {
     private String id;
     private Cluster parent;
@@ -11,7 +13,11 @@ public class Cluster {
     }
 
     public Cluster(String id) {
-        this.id = id;
+        String original = id;
+        char[] chars = original.toCharArray();
+        Arrays.sort(chars);
+        String sorted = new String(chars);
+        this.id = sorted;
     }
 
     public void simplePrint(double step){

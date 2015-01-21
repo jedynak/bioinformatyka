@@ -3,6 +3,7 @@ package pl.bioinformatyka;
 import pl.bioinformatyka.common.Cluster;
 import pl.bioinformatyka.common.DistanceMatrix;
 import pl.bioinformatyka.common.InputReader;
+import pl.bioinformatyka.common.TopologyComparator;
 import pl.bioinformatyka.upgma.UpgmaAlgorithm;
 
 import java.io.FileNotFoundException;
@@ -17,5 +18,7 @@ public class Main {
         Cluster cluster = alg.runAlgorithm();
 
         cluster.simplePrint(1);
+
+        TopologyComparator.compareTopology(alg.getEdgeList(), alg.getEdgeList());
     }
 }

@@ -2,6 +2,7 @@ package pl.bioinformatyka.upgma;
 
 import pl.bioinformatyka.common.Cluster;
 import pl.bioinformatyka.common.DistanceMatrix;
+import pl.bioinformatyka.common.Edge;
 import pl.bioinformatyka.common.Pair;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class UpgmaAlgorithm {
     private DistanceMatrix distanceMatrix;
+    private List<Edge> edgeList;
 
     public UpgmaAlgorithm(DistanceMatrix distanceMatrix) {
         this.distanceMatrix = distanceMatrix;
@@ -16,6 +18,7 @@ public class UpgmaAlgorithm {
 
     public Cluster runAlgorithm() {
         List<Cluster> clusters = new ArrayList<Cluster>();
+        edgeList = new ArrayList<Edge>();
 
         for (int i=0; i<distanceMatrix.getMatrix().length; i++) {
             clusters.add(new Cluster(Character.toString((char) (97 + i))));
@@ -36,6 +39,8 @@ public class UpgmaAlgorithm {
             rightChild.setParent(newCluster);
             newCluster.setLeftChild(leftChild);
             newCluster.setRightChild(rightChild);
+            edgeList.add(new Edge(newCluster.getId(), leftChild.getId()));
+            edgeList.add(new Edge(newCluster.getId(), rightChild.getId()));
             if (nearestPair.getX() < nearestPair.getY()) {
                 clusters.remove(nearestPair.getX());
                 clusters.remove(nearestPair.getY() - 1);
@@ -80,5 +85,9 @@ public class UpgmaAlgorithm {
             distanceMatrix.setMatrix(newDistanceMatrix);
         }
         return clusters.get(0);
+    }
+
+    public List<Edge> getEdgeList() {
+        return edgeList;
     }
 }
