@@ -13,6 +13,8 @@ public class NeighbourJoining {
     private String idY;
     private String[] ids;
     public void NeighbourJoining(){}
+    private List<Edge> edgeList;
+
 
     public Cluster findCluster(String ids, List<Cluster> clusters){
         for(Cluster cluster:clusters){
@@ -26,6 +28,7 @@ public class NeighbourJoining {
     public Cluster algorithm(double[][] matrix){
         DistanceMatrix QMatrix = new DistanceMatrix();
         List<Cluster> clusters = new ArrayList<Cluster>();
+        edgeList = new ArrayList<Edge>();
         ids = new String[2*matrix.length];
         for(int i=0;i<matrix.length;++i){
             Cluster cluster = new Cluster(Character.toString((char)((int)('a')+i)));
@@ -39,7 +42,7 @@ public class NeighbourJoining {
             idX = ids[pair.getX()];
             idY = ids[pair.getY()];
             matrix = updateMatrix( matrix, pair);
-
+            edgeList.add(new Edge(idX,idY));
             Cluster cluster = new Cluster(idX+idY);
             Cluster clusterChild1 = findCluster(idX,clusters);
             Cluster clusterChild2 = findCluster(idY,clusters);
@@ -61,6 +64,7 @@ public class NeighbourJoining {
             }
             System.out.println(pair.getX() + "|" + pair.getY());*/
         }
+        edgeList.add(new Edge(ids[0],ids[1]));
         Cluster cluster = new Cluster(ids[0]+ids[1]);
         Cluster clusterChild1 = findCluster(ids[0],clusters);
         Cluster clusterChild2 = findCluster(ids[1],clusters);
@@ -140,5 +144,9 @@ public class NeighbourJoining {
             }
         }
         return QMatrix;
+    }
+
+    public List<Edge> getEdgeList() {
+        return edgeList;
     }
 }

@@ -10,22 +10,31 @@ import pl.bioinformatyka.common.NeighbourJoining;import java.io.FileNotFoundExce
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        InputReader reader = new InputReader("input.txt");
-        DistanceMatrix ret = reader.readDistanceMatrix();
-        DistanceMatrix ret2 = reader.readDistanceMatrix();
+        if(args.length==0){
+            System.out.println("Nie podano pliku z macierzą");
+        } else {
+            InputReader reader = new InputReader(args[0]);
+            DistanceMatrix ret = reader.readDistanceMatrix();
+            DistanceMatrix ret2 = reader.readDistanceMatrix();
 
-        System.out.println("Upgma:");
-        UpgmaAlgorithm alg = new UpgmaAlgorithm(ret);
-        Cluster cluster = alg.runAlgorithm();
+            System.out.println("Upgma:");
+            UpgmaAlgorithm alg = new UpgmaAlgorithm(ret);
+            Cluster cluster = alg.runAlgorithm();
 
-        cluster.simplePrint(1);
+            cluster.simplePrint(1);
 
-        TopologyComparator.compareTopology(alg.getEdgeList(), alg.getEdgeList());
 
-        System.out.println("NJ:");
-        NeighbourJoining NJ = new NeighbourJoining();
-        Cluster cluster2 = NJ.algorithm(ret2.getMatrix());
+            System.out.println("NJ:");
+            NeighbourJoining NJ = new NeighbourJoining();
+            Cluster cluster2 = NJ.algorithm(ret2.getMatrix());
 
-        cluster2.simplePrint(1);
+            cluster2.simplePrint(1);
+
+            if(TopologyComparator.compareTopology(alg.getEdgeList(), NJ.getEdgeList())==true){
+                System.out.println("Drzewa są takie same");
+            } else {
+                System.out.println("Drzewa są różne");
+            }
+        }
     }
 }
